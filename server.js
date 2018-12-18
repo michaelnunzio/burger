@@ -39,7 +39,7 @@ var connection = mysql.createConnection({
   app.get("/", function(req, res) {
     connection.query("SELECT * FROM burgers;", function(err, data) {
       if (err) {
-        return res.status(500).end();
+        return err;
       }
   
       res.render("index", { burgers: data });
