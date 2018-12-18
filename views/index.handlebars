@@ -1,0 +1,70 @@
+<div id= "container">
+
+  
+
+<h1>BURGERS</h1>
+
+<ul>
+  {{#each burgers}}
+  <li>
+    <p>
+      {{this.id}}. {{this.burger_name}}
+
+      <button data-burgerid="{{this.id}}" class="delBurg">Delete Burger!</button>
+    </p>
+  </li>
+  {{/each}}
+</ul>
+<!--Basic test-->
+
+<!--create new burger-->
+<h2>Create a Burger!</h2>
+<form id="createBurger" class="button-size"> <!--check createplan delete later-->
+  <textarea type="text" name="burger_name"></textarea>
+  <button type="submit">Burger Name?</button>
+</form>
+
+</div>
+
+<!--JSCRIPT-->
+
+<script type="text/javascript">
+$(".delBurg").on("click", function(event){
+    var id = $(this).data("burgerid")
+
+        // Send the DELETE request.
+    $.ajax("/newBurgs/" + id, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted id ", id);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+
+});
+
+  $("#createBurger").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    // [name=plan] will find an element with a "name" attribute equal to the string "plan"
+    var newBurger = {
+      burger_name: $("#createBurger [name=burger_name]").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/newBurgs", {
+      type: "POST",
+      data: newBurger
+    }).then(
+      function() {
+        console.log("created new burger");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+</script>
