@@ -10,3 +10,7 @@ CREATE TABLE burgers
 	devoured BOOLEAN DEFAULT false,
 	PRIMARY KEY (id)
 );
+
+-- INSERT INTO burgers (burger_name, devoured) VALUES ("Sushi Burger", false);
+-- INSERT INTO burgers (burger_name, devoured) VALUES ("Korean BBQ Burger", false);
+-- INSERT INTO burgers (burger_name, devoured) VALUES ("Pork Burger", false);
